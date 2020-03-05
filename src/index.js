@@ -1,14 +1,9 @@
-function * generator (max) {
-	let [prev, curr] = [0, 1]
-	for (;;) {
-		[prev, curr] = [curr, prev + curr]
-		if (prev <= max) {
-			yield prev
-		}
-	}
-}
+import logo from './logo'
+import water from './water'
+import fs from 'fs'
 
-const iterator = generator(1000)
-for (var x of iterator) {
-	console.log(x)
-}
+const logos = logo.match(/[^\s]+\.png/mg).map(path => 'img/bankcard/logo/' + path)
+const waters = water.match(/[^\s]+\.png/mg).map(path => 'img/bankcard/water/' + path)
+
+fs.writeFile('./logo.md', logos.join('\n'), () => {})
+fs.writeFile('./water.md', waters.join('\n'), () => {})
